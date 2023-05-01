@@ -11,3 +11,4 @@ fi
 sleep 1s
 
 nohup java -jar $APPLICATION >> spring.out 2>&1 & echo $! > application.pid
+
