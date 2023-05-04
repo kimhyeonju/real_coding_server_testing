@@ -23,6 +23,6 @@ spring:
     open-in-view: false
 
 logging:
-#  config: classpath:logback/logback.xml
+  config: classpath:logback/logback.xml
   level:
     org.hibernate.SQL: debug
