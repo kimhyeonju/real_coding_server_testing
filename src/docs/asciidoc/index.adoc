@@ -6,8 +6,19 @@ endif::[]
 :toclevels: 2
 :sectlinks:
 
-[[get-post]]
-== get
+[[get-posts]]
+== 게시글 보기
+
+==== HTTP request
+
+include::{snippets}/get-post/http-request.adoc[]
+
+==== HTTP response
+
+include::{snippets}/get-post/http-response.adoc[]
+
+[[get-posts]]
+== 게시글 목록보기
 
 ==== HTTP request
 

@@ -14,14 +14,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.cnu.real_coding_server.service.PostService;
 import com.cnu.real_coding_server.service.week1.practice.service.fixture.PostFixture;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -46,14 +44,11 @@ public class PostControllerTest {
                       RestDocumentationContextProvider restDocumentation) {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
                 .apply(documentationConfiguration(restDocumentation))
-                .alwaysDo(document("{method-name}", preprocessRequest(prettyPrint()),
+                .alwaysDo(document("{method-name}",
+                        preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint())))
                 .build();
     }
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
     @MockBean // 2
     private PostService postService;
 
@@ -64,11 +59,14 @@ public class PostControllerTest {
         given(postService.getPosts())
                 .willReturn(List.of(PostFixture.getNormalPost())); // 3
 
-        // when & then
+        // when
         mockMvc.perform(get("/posts")
                         .contentType(MediaType.APPLICATION_JSON))
+        // then
                 .andExpect(status().isOk())
                 .andDo(document("{method-name}",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
                         responseFields(
                                 List.of(
                                         fieldWithPath("[]").type(JsonFieldType.ARRAY)
@@ -98,25 +96,26 @@ public class PostControllerTest {
         given(postService.getPost(id))
                 .willReturn(Optional.of(PostFixture.getNormalPost()));
 
-        // when & then
+        // when
         mockMvc.perform(get("/posts/" + id)
                         .contentType(MediaType.APPLICATION_JSON))
+        // then
                 .andExpect(status().isOk())
                 .andDo(document("{method-name}",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
                         responseFields(
-                                fieldWithPath("$").type(JsonFieldType.ARRAY)
-                                        .description("결과 데이터"),
-                                fieldWithPath("$.title").type(JsonFieldType.STRING)
+                                fieldWithPath("title").type(JsonFieldType.STRING)
                                         .description("제목"),
-                                fieldWithPath("$.contents").type(JsonFieldType.STRING)
+                                fieldWithPath("contents").type(JsonFieldType.STRING)
                                         .description("글 본문"),
-                                fieldWithPath("$.tag").type(JsonFieldType.STRING)
+                                fieldWithPath("tag").type(JsonFieldType.STRING)
                                         .description("태그"),
-                                fieldWithPath("$.id").type(JsonFieldType.NUMBER)
+                                fieldWithPath("id").type(JsonFieldType.NUMBER)
                                         .description("id"),
-                                fieldWithPath("$.createdAt").type(JsonFieldType.STRING)
+                                fieldWithPath("createdAt").type(JsonFieldType.STRING)
                                         .description("createdAt"),
-                                fieldWithPath("$.updatedAt").type(JsonFieldType.STRING)
+                                fieldWithPath("updatedAt").type(JsonFieldType.STRING)
                                         .description("updatedAt")
                         )
                 ));

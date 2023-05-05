@@ -445,10 +445,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#get-post">get</a>
+<li><a href="#get-posts">게시글 보기</a>
 <ul class="sectlevel3">
 <li><a href="#_http_request">HTTP request</a></li>
 <li><a href="#_http_response">HTTP response</a></li>
+</ul>
+</li>
+<li><a href="#get-posts">게시글 목록보기</a>
+<ul class="sectlevel3">
+<li><a href="#_http_request_2">HTTP request</a></li>
+<li><a href="#_http_response_2">HTTP response</a></li>
 </ul>
 </li>
 </ul>
@@ -456,13 +462,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="get-post"><a class="link" href="#get-post">get</a></h2>
+<h2 id="get-posts"><a class="link" href="#get-posts">게시글 보기</a></h2>
 <div class="sectionbody">
 <div class="sect3">
 <h4 id="_http_request"><a class="link" href="#_http_request">HTTP request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /posts HTTP/1.1
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /posts/1 HTTP/1.1
 Content-Type: application/json
 Host: localhost:8080</code></pre>
 </div>
@@ -477,9 +483,53 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json
-Content-Length: 152
+Content-Length: 181
 
-[{"createdAt":"2023-01-16T11:50:19.917","updatedAt":"2023-05-01T11:50:19.917","id":1,"title":"정상 제목2","contents":"정상 본문2","tag":"JAVA"}]</code></pre>
+{
+  "createdAt" : "2023-01-16T11:50:19.917",
+  "updatedAt" : "2023-05-01T11:50:19.917",
+  "id" : 1,
+  "title" : "정상 제목2",
+  "contents" : "정상 본문2",
+  "tag" : "JAVA"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="get-posts"><a class="link" href="#get-posts">게시글 목록보기</a></h2>
+<div class="sectionbody">
+<div class="sect3">
+<h4 id="_http_request_2"><a class="link" href="#_http_request_2">HTTP request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /posts HTTP/1.1
+Content-Type: application/json
+Host: localhost:8080</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_http_response_2"><a class="link" href="#_http_response_2">HTTP response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Content-Type: application/json
+Content-Length: 185
+
+[ {
+  "createdAt" : "2023-01-16T11:50:19.917",
+  "updatedAt" : "2023-05-01T11:50:19.917",
+  "id" : 1,
+  "title" : "정상 제목2",
+  "contents" : "정상 본문2",
+  "tag" : "JAVA"
+} ]</code></pre>
 </div>
 </div>
 </div>
@@ -489,7 +539,7 @@ Content-Length: 152
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2023-05-01 18:28:14 +0900
+Last updated 2023-05-05 22:30:39 +0900
 </div>
 </div>
 </body>
