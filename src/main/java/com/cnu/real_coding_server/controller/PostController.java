@@ -3,12 +3,21 @@ package com.cnu.real_coding_server.controller;
 import com.cnu.real_coding_server.entity.Post;
 import com.cnu.real_coding_server.model.request.PostRequest;
 import com.cnu.real_coding_server.service.PostService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+
+@Slf4j
 @RestController
 @RequestMapping("/posts")
 @RequiredArgsConstructor
@@ -22,6 +31,7 @@ public class PostController {
 
     @GetMapping
     public ResponseEntity<List<Post>> getPosts() {
+        log.info("get posts");
         return ResponseEntity.ok(postService.getPosts());
     }
 
