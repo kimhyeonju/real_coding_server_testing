@@ -16,22 +16,32 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update # ??????? ??? ? ??????? ????? ?? ??? ??
-      
+
     properties:
       hibernate:
         format_sql: true # ???? query? ???
     open-in-view: false
 
 logging:
-#  config: classpath:logback/logback-spring.xml
+  #  config: classpath:logback/logback-spring.xml
   level:
     org.hibernate.SQL: debug
 
 management:
   endpoint:
     health:
-      show-details: always
+      enabled: true
+    shutdown:
+      enabled: false # 실제 어플리케이션을 내릴 수 있는 위험한 endpoint
+    info:
+      enabled: true
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
   endpoints:
     web:
       exposure:
-        include: '*'
+#        include: '*'
+        include: metrics, info, health, prometheus # 노출시킬 endpoint를 설정
+
